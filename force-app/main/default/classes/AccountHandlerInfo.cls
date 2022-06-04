@@ -13,7 +13,7 @@ public class AccountHandlerInfo {
                 account acc = new Account();
                 acc.name = eachAccName;
                 accList.add(acc);                
-            }
+            }awd//
               //Test
      
            insert accList;
