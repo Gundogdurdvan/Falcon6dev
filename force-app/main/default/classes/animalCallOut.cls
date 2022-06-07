@@ -2,7 +2,7 @@ public with sharing class animalCallOut {
     public static void fetchAnimals() {
         //1. prepare request
         HttpRequest Request = new HttpRequest();
-        Request.setEndpoint('https://practicecom-bc-dev-ed.my.salesforce.com/one/one.app#/alohaRedirect/0rp8b0000004yhH?isdtp=p1');
+        Request.setEndpoint('https://th-apex-http-callout.herokuapp.com/animals');
         Request.setMethod('GET');
      
 
@@ -18,6 +18,16 @@ public with sharing class animalCallOut {
             string animalsJSON = response.getBody();
             string test = string.valueOf(response);
             System.debug(test);
+
+            object ob = JSON.deserializeUntyped(animalsJSON);
+            map<string, object> result = (map<string, object>)ob;
+            list<object> animals = (list<object>) result.get('animals');
+            System.debug('==========Object animals STARt========');
+            for (object a : animals) {
+                system.debug(a);
+            }
+
+            System.debug(('==========Object animals END========'));
         }else {
             //NOT SUCCES,,
             System.debug('Something went wrong people');
@@ -27,3 +37,7 @@ public with sharing class animalCallOut {
 
     }
 }
+
+//type cast = data type ==> object ;
+
+
