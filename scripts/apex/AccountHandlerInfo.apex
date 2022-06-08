@@ -4,4 +4,4 @@ AccountManager.updateDescriptionFields(test);
 
 
 
-animalCallOut.fetchAnimals();
+animalCallOut.fetchAnimals2();
