@@ -1,12 +1,27 @@
 @istest
 public with sharing class AnimalsCalloutsTest {
     @istest
-    private static void testFetchAnimalsSucces(){
+    private static void testFetchAnimalsSuccess() {
         AnimalsHttpCalloutMock am = new AnimalsHttpCalloutMock();
-        test.setmock(HttpCalloutMock.class,am);
-        test.startTest();
+        Test.setMock(HttpCalloutMock.class, am );
+
+        Test.startTest();
+        animalCallOut.fetchAnimals();
         HttpResponse response = animalCallOut.fetchAnimals2();
-        test.StopTest();
+        Test.stopTest();
+
         system.assertEquals(200, response.getStatusCode());
+    }
+    @istest
+    private static void testFetchAnimalsFailure() {
+        //set failure mock
+        AnimalsHttpMockCalloutFailure am = new AnimalsHttpMockCalloutFailure();
+        Test.setMock(HttpCalloutMock.class, am );
+
+        Test.startTest();
+        HttpResponse response = animalCallOut.fetchAnimals2();
+        Test.stopTest();
+
+        system.assertEquals(404, response.getStatusCode());
     }
 }

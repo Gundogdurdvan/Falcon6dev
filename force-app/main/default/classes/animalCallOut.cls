@@ -1,9 +1,22 @@
 public with sharing class animalCallOut {
+
+    private static string GET_ANIMALS_ENDPOINT = calloutInfo__mdt.getInstance('GET_ANIMALS').Endpoint__C;
+    private static string POST_ANIMALS_ENDPOINT = calloutInfo__mdt.getInstance('POST_ANIMALS').Endpoint__c;
+    private static string HTTP_GET = 'GET';
+    private static string HTTP_Post = 'POST';
+    private static string ilkurun =product__mdt.getInstance('ilkUrun').ProductName__c;
+    private static decimal productID = product__mdt.getInstance('ilkUrun').Product_ID__c;
+    private static Object tcknumber = plane__mdt.getInstance('Pegasus');
+    public static void name() {
+        System.debug(ilkurun+' '+productID);
+        System.debug('ticket number ==>'+ tcknumber);
+    }
+
     public static void fetchAnimals() {
         //1. prepare request
         HttpRequest Request = new HttpRequest();
-        Request.setEndpoint('https://th-apex-http-callout.herokuapp.com/animals');
-        Request.setMethod('GET');
+        Request.setEndpoint(GET_ANIMALS_ENDPOINT);
+        Request.setMethod(HTTP_GET);
      
 
         //2. prepare http
@@ -36,16 +49,14 @@ public with sharing class animalCallOut {
         }
 
     }
-
-
 //type cast = data type ==> object ;
 
-
+  
 public static HttpResponse fetchAnimals2() {
     //1. prepare request
     HttpRequest Request = new HttpRequest();
-    Request.setEndpoint('https://th-apex-http-callout.herokuapp.com/animals');
-    Request.setMethod('GET');
+    Request.setEndpoint(GET_ANIMALS_ENDPOINT);
+    Request.setMethod(HTTP_GET);
  
 
     //2. prepare http
@@ -64,11 +75,40 @@ public static HttpResponse fetchAnimals2() {
         }
     }else {
         //NOT SUCCES,,
+        string result ='Failed';
         System.debug('Something went wrong people');
         //Test deneme 12123;
         
     }
     return response;
 }
+    public static HttpResponse postAnimals(){
+        HttpRequest request = new HttpRequest();
+        
+        request.setEndpoint(POST_ANIMALS_ENDPOINT);
+        request.setHeader('Content-Type', 'application/json');
+        request.setBody('{"name":"Fluffykins"}');
+        request.setMethod(HTTP_Post);
+
+
+        Http Http = new Http();
+
+        HttpResponse response = Http.send(request);
+        System.debug(response.getStatusCode());
+        if (response.getStatusCode()==201) {
+            AnimalsCalloutResponse animalsResponse = (AnimalsCalloutResponse)Json.deserialize(response.getBody(), animalsCalloutResponse.class);
+
+            System.debug('Animal list start');
+            list<string> animals = animalsResponse.animals;
+            for (string a : animals) {
+                System.debug(a);
+            }
+        }else {
+            System.debug('Something went wrong');
+        }
+        return response;
+
+
+    }
 
 }

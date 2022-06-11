@@ -5,3 +5,9 @@ AccountManager.updateDescriptionFields(test);
 
 
 animalCallOut.fetchAnimals2();
+animalCallOut.postAnimals();
+animalCallOut.name();
+DummyPostCallout.postCallout();
+
+
+
