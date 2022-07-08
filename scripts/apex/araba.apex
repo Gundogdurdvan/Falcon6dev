@@ -9,3 +9,6 @@ for (account eachAcc : listAllAcc) {
 }
 
 update listAllAcc;
+
+
+system.debug('I love u ');
