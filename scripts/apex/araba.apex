@@ -12,3 +12,7 @@ update listAllAcc;
 
 
 system.debug('I love u ');
+
+
+
+DmlGavernorlimts.DmlGavernorlimits();

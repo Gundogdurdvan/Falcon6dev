@@ -5,7 +5,7 @@ fullname = "Rido";
 title = "SF Dev";
 
 handleChange(event){
-    this.title = event.target.value;
+    this.title = event.detail.value;
     
 }
 }
