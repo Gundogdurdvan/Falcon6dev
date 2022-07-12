@@ -3,9 +3,16 @@
         <div class="slds-var-m-around_medium">
             <lightning-record-form
                 object-api-name={objectName}
-                fields=""
-                id="">
-        </lightning-record-form>
+                layout-type="Compact"
+                fields={fields}
+                record-id={recordId}
+                columns= "2"
+                onsuccess={successHandler}
+
+                
+                >                
+            </lightning-record-form>
+        
         </div>
        
     </lightning-card>
