@@ -1,0 +1,37 @@
+<template>
+    <lightning-card title="FAMOUS PERSONS">
+        <div class="slds-var-m-around_medium">
+            <template for:each={contacts} for:item="Contact">
+                <div key={Contact}>
+                        <strong>{Contact.name}</strong><br/>
+                        {Contact.title}, {Contact.company}<br/>
+                        {Contact.stay} <br/><br/>                
+                
+                </div>
+            </template>
+
+        </div>
+    </lightning-card>
+</template>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- list<account> acc = [select id from account];
+
+for(account eachAcc : acc){
+    <div></div>
+}     -->
